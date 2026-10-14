@@ -1,0 +1,752 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080d1b">
+<meta name="description" content="WebKreatif menyediakan jasa pembuatan website modern, responsif, kreatif, dan terjangkau untuk pelajar, UMKM, dan bisnis.">
+<title>WebKreatif — Wujudkan Ide Digitalmu</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg: #080d1b;
+  --panel: #101a30;
+  --blue: #579bff;
+  --cyan: #61e5ff;
+  --text: #f3f6ff;
+  --muted: #9aa9c4;
+  --border: rgba(160,190,255,.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { font: inherit; }
+.container { width: min(1120px, 90%); margin: auto; }
+section { padding: 100px 0; scroll-margin-top: 85px; }
+
+/* Background */
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+}
+.orb {
+  position: absolute;
+  width: 330px;
+  height: 330px;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: .19;
+  background: #1769ff;
+  animation: float 12s ease-in-out infinite alternate;
+}
+.orb.one { top: 10%; left: -140px; }
+.orb.two {
+  right: -150px;
+  top: 50%;
+  background: #00c9d8;
+  animation-delay: -5s;
+}
+@keyframes float {
+  from { transform: translate(0,0) scale(1); }
+  to { transform: translate(80px,50px) scale(1.25); }
+}
+
+/* Navbar */
+header {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  width: 100%;
+  background: rgba(8,13,27,.8);
+  border-bottom: 1px solid transparent;
+  backdrop-filter: blur(18px);
+  transition: .3s;
+}
+header.scrolled { border-color: var(--border); }
+.nav {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.logo { font-size: 23px; font-weight: 800; letter-spacing: -1px; }
+.logo span, .gradient {
+  background: linear-gradient(110deg,var(--blue),var(--cyan));
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+.nav-links { display: flex; align-items: center; gap: 27px; }
+.nav-links a { color: var(--muted); font-size: 13px; transition: .25s; }
+.nav-links a:hover, .nav-links a.active { color: var(--cyan); }
+.menu-btn {
+  display: none;
+  border: 1px solid var(--border);
+  color: white;
+  background: var(--panel);
+  border-radius: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 1px solid transparent;
+  padding: 13px 21px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform .25s, box-shadow .25s, background .25s;
+}
+.btn:hover { transform: translateY(-3px); }
+.btn-primary {
+  color: #061326;
+  background: linear-gradient(110deg,var(--blue),var(--cyan));
+  box-shadow: 0 8px 30px rgba(56,145,255,.2);
+}
+.btn-primary:hover { box-shadow: 0 10px 38px rgba(56,145,255,.4); }
+.btn-outline { border-color: var(--border); background: rgba(255,255,255,.025); }
+.btn-outline:hover { border-color: var(--blue); background: rgba(87,155,255,.08); }
+
+/* Hero */
+.hero {
+  min-height: 100vh;
+  padding: 150px 0 75px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  align-items: center;
+  gap: 55px;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid var(--border);
+  background: rgba(87,155,255,.07);
+  color: #a9d8ff;
+  padding: 8px 14px;
+  border-radius: 30px;
+  font-size: 12px;
+  margin-bottom: 23px;
+  animation: appear .8s both;
+}
+.pulse {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #55edb2;
+  box-shadow: 0 0 12px #55edb2;
+}
+.hero h1 {
+  font-size: clamp(39px,5.6vw,66px);
+  line-height: 1.12;
+  letter-spacing: -3px;
+  margin-bottom: 24px;
+  animation: appear .8s .1s both;
+}
+.hero-copy {
+  max-width: 550px;
+  color: var(--muted);
+  margin-bottom: 30px;
+  animation: appear .8s .2s both;
+}
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; animation: appear .8s .3s both; }
+.hero-meta {
+  display: flex; flex-wrap: wrap; gap: 22px;
+  margin-top: 35px;
+  color: var(--muted); font-size: 12px;
+}
+.hero-meta span::before { content: "✓ "; color: var(--cyan); }
+
+/* Browser mockup */
+.visual { position: relative; animation: appear 1s .2s both; }
+.browser {
+  border: 1px solid rgba(150,190,255,.25);
+  border-radius: 19px;
+  padding: 12px;
+  background: rgba(17,28,50,.86);
+  box-shadow: 0 35px 100px rgba(0,0,0,.35), 0 0 60px rgba(49,127,255,.08);
+  transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
+  transition: transform .5s;
+}
+.browser:hover { transform: perspective(1000px) rotateY(0) rotateX(0) translateY(-5px); }
+.browser-top {
+  display: flex; align-items: center; gap: 6px;
+  padding: 7px 8px 15px;
+}
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #fb7185; }
+.dot:nth-child(2) { background: #facc15; }
+.dot:nth-child(3) { background: #4ade80; }
+.address {
+  margin-left: 10px; flex: 1; text-align: center;
+  border-radius: 6px; background: #0a1223;
+  color: #7f94b8; font-size: 10px; padding: 5px;
+}
+.mock-site {
+  min-height: 330px; padding: 24px 18px;
+  border-radius: 11px;
+  background: radial-gradient(ellipse at 70% 30%,#173d73,#0c1730 65%);
+  overflow: hidden; position: relative;
+}
+.mock-nav { display: flex; justify-content: space-between; font-size: 10px; color: #c8ddff; }
+.mock-logo { font-weight: 800; }
+.mock-pill { border: 1px solid #3d6497; padding: 4px 8px; border-radius: 5px; }
+.mock-content { margin-top: 60px; position: relative; z-index: 1; }
+.mock-content small { color: var(--cyan); font-size: 9px; }
+.mock-content h3 { font-size: 29px; line-height: 1.2; margin: 9px 0; }
+.mock-content p { font-size: 10px; color: #b6c8e7; max-width: 220px; }
+.mock-cta { display: inline-block; margin-top: 17px; background: #63a6ff; color: #061326; padding: 7px 12px; border-radius: 5px; font-size: 9px; font-weight: 800; }
+.mock-circle {
+  position: absolute; right: -50px; bottom: -85px;
+  width: 230px; height: 230px; border-radius: 50%;
+  border: 1px solid rgba(97,229,255,.5);
+  box-shadow: 0 0 0 25px rgba(97,229,255,.035),0 0 0 55px rgba(97,229,255,.025);
+}
+.float-card {
+  position: absolute; padding: 12px 15px; border-radius: 13px;
+  background: rgba(19,32,56,.95); border: 1px solid var(--border);
+  box-shadow: 0 15px 40px #0004;
+  animation: bob 4s ease-in-out infinite;
+}
+.float-card strong { display: block; font-size: 13px; }
+.float-card small { color: var(--muted); font-size: 10px; }
+.float-card.one { left: -32px; bottom: 40px; }
+.float-card.two { right: -18px; top: 60px; animation-delay: -2s; }
+@keyframes bob { 50% { transform: translateY(-10px); } }
+@keyframes appear {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Stats */
+.stats { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(255,255,255,.015); }
+.stats-grid { display: grid; grid-template-columns: repeat(3,1fr); padding: 27px 0; text-align: center; }
+.stat strong { font-size: 19px; display: block; }
+.stat span { font-size: 12px; color: var(--muted); }
+
+/* General section */
+.section-head { max-width: 650px; margin: 0 auto 45px; text-align: center; }
+.kicker { color: var(--cyan); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+.section-head h2 { font-size: clamp(29px,4vw,43px); letter-spacing: -1.5px; line-height: 1.2; margin: 13px 0; }
+.section-head p { color: var(--muted); font-size: 14px; }
+.cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 19px; }
+.card {
+  padding: 27px; background: linear-gradient(145deg,rgba(21,35,61,.9),rgba(12,20,37,.8));
+  border: 1px solid var(--border); border-radius: 17px;
+  transition: transform .3s,border-color .3s,box-shadow .3s;
+}
+.card:hover { transform: translateY(-8px); border-color: rgba(97,229,255,.5); box-shadow: 0 18px 50px #0002; }
+.icon {
+  width: 48px; height: 48px; display: grid; place-items: center;
+  border-radius: 13px; font-size: 22px;
+  background: linear-gradient(135deg,rgba(87,155,255,.2),rgba(97,229,255,.08));
+  border: 1px solid var(--border); margin-bottom: 21px;
+}
+.card h3 { font-size: 18px; margin-bottom: 10px; }
+.card p { color: var(--muted); font-size: 13px; margin-bottom: 18px; }
+.card-link { color: var(--cyan); font-size: 12px; font-weight: 700; }
+
+/* Portfolio */
+.portfolio { background: rgba(255,255,255,.015); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.project-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 23px; }
+.project { overflow: hidden; border: 1px solid var(--border); border-radius: 17px; background: #10192b; transition: .3s; }
+.project:hover { transform: translateY(-5px); border-color: var(--blue); }
+.project-art {
+  min-height: 220px; padding: 27px; display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(ellipse at 50% 0%,#28508b,#10192e 75%);
+}
+.project:nth-child(2) .project-art { background: radial-gradient(ellipse at 50% 0%,#235e62,#10192e 75%); }
+.project-window {
+  width: 100%; max-width: 360px; background: #0a1222; border: 1px solid #ffffff25;
+  border-radius: 10px; padding: 13px; box-shadow: 0 15px 40px #0004;
+}
+.project-bar { height: 5px; width: 55px; border-radius: 5px; background: var(--cyan); margin-bottom: 18px; }
+.project-lines { height: 8px; width: 70%; background: #b6d4ff35; border-radius: 5px; margin: 10px 0; }
+.project-lines.short { width: 43%; }
+.project-blocks { display: grid; grid-template-columns: repeat(3,1fr); gap: 7px; margin-top: 20px; }
+.project-blocks span { height: 55px; border-radius: 5px; background: linear-gradient(135deg,#254c7b,#1b2940); }
+.project-info { padding: 22px; }
+.project-info p { font-size: 13px; color: var(--muted); margin-top: 5px; }
+
+/* Steps */
+.steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.step { border-top: 1px solid var(--border); padding-top: 23px; }
+.step-num { font-size: 12px; color: var(--cyan); font-weight: 800; }
+.step h3 { margin: 9px 0; font-size: 17px; }
+.step p { color: var(--muted); font-size: 13px; }
+
+/* Price */
+.price-card {
+  max-width: 520px; margin: auto; padding: 34px;
+  border: 1px solid rgba(97,229,255,.35); border-radius: 22px;
+  background: linear-gradient(145deg,#142541,#0d172a);
+  box-shadow: 0 20px 70px rgba(40,100,200,.1);
+}
+.price-card h3 { font-size: 21px; }
+.price-card .desc { color: var(--muted); font-size: 13px; margin: 7px 0 23px; }
+.price { font-size: 38px; font-weight: 800; letter-spacing: -1px; }
+.price small { font-size: 13px; color: var(--muted); font-weight: 500; letter-spacing: 0; }
+.features { list-style: none; margin: 23px 0; }
+.features li { padding: 9px 0; font-size: 13px; border-bottom: 1px solid var(--border); color: #d5e0f4; }
+.features li::before { content: "✓"; color: var(--cyan); margin-right: 10px; }
+.price-card .btn { width: 100%; }
+
+/* Contact */
+.contact-box {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+  padding: 38px; border: 1px solid var(--border); border-radius: 21px;
+  background: linear-gradient(120deg,rgba(28,54,90,.55),rgba(13,22,40,.85));
+}
+.contact-box h2 { font-size: 32px; line-height: 1.25; margin: 12px 0; }
+.contact-box p { color: var(--muted); font-size: 13px; }
+.contact-actions { display: flex; flex-direction: column; justify-content: center; gap: 12px; }
+.contact-note { font-size: 11px !important; margin-top: 12px; }
+
+/* Footer */
+footer { border-top: 1px solid var(--border); padding: 27px 0; }
+.footer-row { display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+footer p { color: var(--muted); font-size: 11px; }
+.footer-links { display: flex; gap: 17px; font-size: 12px; color: var(--muted); }
+.footer-links a:hover { color: var(--cyan); }
+
+/* Scroll reveal */
+.reveal { opacity: 0; transform: translateY(25px); transition: opacity .7s,transform .7s; }
+.reveal.show { opacity: 1; transform: translateY(0); }
+.back-top {
+  position: fixed; z-index: 900; bottom: 23px; right: 22px;
+  width: 43px; height: 43px; border: 1px solid var(--border);
+  border-radius: 12px; background: #172741; color: white;
+  cursor: pointer; opacity: 0; pointer-events: none; transform: translateY(10px); transition: .3s;
+}
+.back-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
+
+@media (max-width: 850px) {
+  .nav-links { gap: 14px; }
+  .nav-links a { font-size: 11px; }
+  .hero-grid { gap: 30px; }
+  .float-card.one { left: -10px; }
+  .float-card.two { right: -8px; }
+  .cards { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 650px) {
+  section { padding: 72px 0; }
+  .nav { min-height: 68px; }
+  .menu-btn { display: block; }
+  .nav-links {
+    display: none; position: absolute; top: 68px; left: 5%; right: 5%;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: #101a30; border: 1px solid var(--border);
+    border-radius: 13px; padding: 9px;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { padding: 12px; font-size: 13px; }
+  .nav-links .nav-cta { text-align: center; background: #1a3352; border-radius: 8px; }
+  .hero { min-height: auto; padding: 125px 0 75px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 55px; }
+  .hero h1 { letter-spacing: -2px; }
+  .hero-copy { font-size: 14px; }
+  .visual { margin: 0 12px; }
+  .browser { transform: none; }
+  .mock-site { min-height: 290px; }
+  .mock-content { margin-top: 45px; }
+  .float-card { padding: 9px 11px; }
+  .float-card.one { left: -9px; bottom: 22px; }
+  .float-card.two { right: -9px; top: 35px; }
+  .stats-grid { gap: 10px; }
+  .stat strong { font-size: 16px; }
+  .stat span { font-size: 10px; }
+  .cards, .project-grid, .steps, .contact-box { grid-template-columns: 1fr; }
+  .contact-box { padding: 26px; gap: 24px; }
+  .contact-box h2 { font-size: 27px; }
+  .project-art { min-height: 190px; }
+  .footer-row { flex-direction: column; text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+</head>
+
+<body>
+<div class="ambient" aria-hidden="true">
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+</div>
+
+<header id="header">
+  <div class="container nav">
+    <a href="#beranda" class="logo">Web<span>Kreatif.</span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Buka menu" aria-expanded="false">☰</button>
+    <nav class="nav-links" id="navLinks" aria-label="Navigasi utama">
+      <a href="#beranda">Beranda</a>
+      <a href="#layanan">Layanan</a>
+      <a href="#portofolio">Portofolio</a>
+      <a href="#harga">Harga</a>
+      <a href="#kontak" class="nav-cta">Hubungi Kami ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="beranda">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow"><span class="pulse"></span> KREATIVITAS BERTEMU TEKNOLOGI</div>
+      <h1>Bangun Identitas Digital yang <span class="gradient">Berbeda.</span></h1>
+      <p class="hero-copy">
+        Kami membantu mengubah ide menjadi website modern, responsif,
+        dan menarik untuk memperkenalkan bisnis, layanan, maupun karya kamu ke dunia digital.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#layanan">Jelajahi Layanan <span>↗</span></a>
+        <a class="btn btn-outline" href="#portofolio">Lihat Portofolio</a>
+      </div>
+      <div class="hero-meta">
+        <span>Desain responsif</span>
+        <span>Tampilan modern</span>
+        <span>Ramah pengguna</span>
+      </div>
+    </div>
+
+    <div class="visual">
+      <div class="browser">
+        <div class="browser-top">
+          <i class="dot"></i><i class="dot"></i><i class="dot"></i>
+          <div class="address">webkreatif.example</div>
+        </div>
+        <div class="mock-site">
+          <div class="mock-nav">
+            <span class="mock-logo">STUDIO.</span>
+            <span class="mock-pill">Explore ↗</span>
+          </div>
+          <div class="mock-content">
+            <small>DESIGN YOUR FUTURE</small>
+            <h3>Ideas into<br><span class="gradient">Experiences.</span></h3>
+            <p>Creative digital solutions built around your vision.</p>
+            <span class="mock-cta">Discover More ↗</span>
+          </div>
+          <div class="mock-circle"></div>
+        </div>
+      </div>
+      <div class="float-card one"><strong>✦ Desain Kreatif</strong><small>Detail yang berkesan</small></div>
+      <div class="float-card two"><strong>↗ 100% Responsif</strong><small>HP, tablet, dan laptop</small></div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="container stats-grid">
+    <div class="stat"><strong>Modern</strong><span>Desain kekinian</span></div>
+    <div class="stat"><strong>Responsif</strong><span>Semua ukuran layar</span></div>
+    <div class="stat"><strong>Terjangkau</strong><span>Sesuai kebutuhan</span></div>
+  </div>
+</div>
+
+<section id="layanan">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Layanan Kami</span>
+      <h2>Solusi Digital untuk <span class="gradient">Ide Besarmu</span></h2>
+      <p>Pilih layanan yang sesuai dengan kebutuhan proyekmu.</p>
+    </div>
+    <div class="cards">
+      <article class="card reveal">
+        <div class="icon">⌘</div>
+        <h3>Website Bisnis</h3>
+        <p>Perkenalkan bisnis, produk, dan layanan melalui halaman yang informatif dan profesional.</p>
+        <a href="#kontak" class="card-link">Diskusikan proyek ↗</a>
+      </article>
+      <article class="card reveal">
+        <div class="icon">◈</div>
+        <h3>Website Portofolio</h3>
+        <p>Tampilkan karya, pengalaman, dan kemampuanmu dalam satu halaman digital.</p>
+        <a href="#kontak" class="card-link">Diskusikan proyek ↗</a>
+      </article>
+      <article class="card reveal">
+        <div class="icon">▤</div>
+        <h3>Landing Page</h3>
+        <p>Halaman khusus untuk promosi produk, kegiatan, layanan, atau kampanye digital.</p>
+        <a href="#kontak" class="card-link">Diskusikan proyek ↗</a>
+      </article>
+      <article class="card reveal">
+        <div class="icon">✧</div>
+        <h3>Desain UI Website</h3>
+        <p>Rancangan tampilan dengan susunan elemen yang konsisten dan mudah dipahami.</p>
+        <a href="#kontak" class="card-link">Diskusikan proyek ↗</a>
+      </article>
+      <article class="card reveal">
+        <div class="icon">▣</div>
+        <h3>Website Organisasi</h3>
+        <p>Publikasikan profil, agenda, informasi, dan kegiatan organisasi atau sekolah.</p>
+        <a href="#kontak" class="card-link">Diskusikan proyek ↗</a>
+      </article>
+      <article class="card reveal">
+        <div class="icon">⚙</div>
+        <h3>Perbaikan Website</h3>
+        <p>Bantuan memperbaiki tampilan, tata letak, dan responsivitas website statis.</p>
+        <a href="#kontak" class="card-link">Diskusikan proyek ↗</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="portfolio" id="portofolio">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Portofolio</span>
+      <h2>Contoh Karya <span class="gradient">Digital</span></h2>
+      <p>Contoh konsep desain untuk menggambarkan jenis website yang bisa dikembangkan.</p>
+    </div>
+    <div class="project-grid">
+      <article class="project reveal">
+        <div class="project-art">
+          <div class="project-window">
+            <div class="project-bar"></div>
+            <div class="project-lines"></div>
+            <div class="project-lines short"></div>
+            <div class="project-blocks"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+        <div class="project-info">
+          <h3>Business Landing Page</h3>
+          <p>Konsep website bisnis dengan fokus pada layanan dan ajakan bertindak.</p>
+        </div>
+      </article>
+      <article class="project reveal">
+        <div class="project-art">
+          <div class="project-window">
+            <div class="project-bar"></div>
+            <div class="project-lines short"></div>
+            <div class="project-lines"></div>
+            <div class="project-blocks"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+        <div class="project-info">
+          <h3>Creative Portfolio</h3>
+          <p>Konsep portofolio untuk menampilkan profil, keahlian, dan hasil karya.</p>
+        </div>
+      </article>
+    </div>
+    <p style="text-align:center;color:var(--muted);font-size:11px;margin-top:18px">
+      Catatan: gambar di atas adalah ilustrasi konsep, bukan proyek klien nyata.
+    </p>
+  </div>
+</section>
+
+<section id="proses">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Cara Kerja</span>
+      <h2>Dari Ide Menjadi <span class="gradient">Website</span></h2>
+      <p>Proses kerja yang sederhana dan terarah.</p>
+    </div>
+    <div class="steps">
+      <article class="step reveal">
+        <span class="step-num">LANGKAH 01</span>
+        <h3>Diskusi Kebutuhan</h3>
+        <p>Tentukan tujuan website, target pengunjung, konten, dan fitur yang dibutuhkan.</p>
+      </article>
+      <article class="step reveal">
+        <span class="step-num">LANGKAH 02</span>
+        <h3>Desain dan Pembuatan</h3>
+        <p>Susun tampilan dan kembangkan halaman berdasarkan kesepakatan proyek.</p>
+      </article>
+      <article class="step reveal">
+        <span class="step-num">LANGKAH 03</span>
+        <h3>Pemeriksaan dan Publikasi</h3>
+        <p>Periksa tampilan di perangkat berbeda sebelum website dipublikasikan.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="harga">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Paket Layanan</span>
+      <h2>Mulai dari yang <span class="gradient">Kamu Butuhkan</span></h2>
+      <p>Harga berikut merupakan contoh awal dan dapat disesuaikan dengan ruang lingkup proyek.</p>
+    </div>
+    <div class="price-card reveal">
+      <h3>Paket Starter</h3>
+      <p class="desc">Untuk portofolio, profil usaha, atau landing page sederhana.</p>
+      <div class="price">Rp50.000 <small>/ mulai dari</small></div>
+      <ul class="features">
+        <li>Halaman website sederhana</li>
+        <li>Tampilan responsif untuk HP dan laptop</li>
+        <li>Desain sesuai kebutuhan dasar</li>
+        <li>Bantuan publikasi website statis</li>
+        <li>Harga final disepakati sebelum pengerjaan</li>
+      </ul>
+      <a href="#kontak" class="btn btn-primary">Tanyakan Paket ↗</a>
+    </div>
+    <p style="text-align:center;color:var(--muted);font-size:11px;margin-top:16px">
+      Biaya domain khusus, hosting berbayar, dan fitur tambahan dapat dikenakan terpisah.
+    </p>
+  </div>
+</section>
+
+<section id="tentang">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Tentang WebKreatif</span>
+      <h2>Teknologi untuk <span class="gradient">Berkarya</span></h2>
+      <p>
+        WebKreatif adalah konsep layanan pembuatan website yang berfokus pada
+        desain modern, pengalaman pengguna, dan solusi digital sesuai kebutuhan.
+        Kami ingin membantu lebih banyak ide hadir secara online.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="kontak">
+  <div class="container">
+    <div class="contact-box reveal">
+      <div>
+        <span class="kicker">Mulai Proyekmu</span>
+        <h2>Punya Ide? Mari <span class="gradient">Wujudkan.</span></h2>
+        <p>
+          Ceritakan website yang ingin kamu buat. Hubungi kami untuk
+          membahas kebutuhan, desain, fitur, dan perkiraan biaya.
+        </p>
+      </div>
+      <div class="contact-actions">
+        <a class="btn btn-primary" id="waButton" href="https://wa.me/" target="_blank" rel="noopener noreferrer">
+          Hubungi via WhatsApp ↗
+        </a>
+        <a class="btn btn-outline" href="mailto:emailkamu@example.com?subject=Permintaan%20Pembuatan%20Website">
+          Kirim Email ↗
+        </a>
+        <p class="contact-note">Ganti nomor WhatsApp dan alamat email dengan kontak milikmu sebelum website dipublikasikan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container footer-row">
+    <a href="#beranda" class="logo">Web<span>Kreatif.</span></a>
+    <p>© <span id="year"></span> WebKreatif. Dibuat dengan kreativitas.</p>
+    <div class="footer-links">
+      <a href="#layanan">Layanan</a>
+      <a href="#portofolio">Karya</a>
+      <a href="#kontak">Kontak</a>
+    </div>
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="Kembali ke atas">↑</button>
+
+<script>
+const header = document.getElementById('header');
+const backTop = document.getElementById('backTop');
+const menuBtn = document.getElementById('menuBtn');
+const navLinks = document.getElementById('navLinks');
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Mobile navigation
+menuBtn.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', String(open));
+  menuBtn.textContent = open ? '✕' : '☰';
+});
+
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.textContent = '☰';
+  });
+});
+
+// Scroll effects
+function handleScroll() {
+  header.classList.toggle('scrolled', window.scrollY > 20);
+  backTop.classList.toggle('show', window.scrollY > 450);
+}
+window.addEventListener('scroll', handleScroll, { passive: true });
+handleScroll();
+
+backTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// Reveal elements as they enter the viewport
+const revealItems = document.querySelectorAll('.reveal');
+
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealItems.forEach(item => observer.observe(item));
+} else {
+  revealItems.forEach(item => item.classList.add('show'));
+}
+
+// Highlight the current navigation section
+const sections = document.querySelectorAll('main section[id]');
+if ('IntersectionObserver' in window) {
+  const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.querySelectorAll('a[href^="#"]').forEach(link => {
+          link.classList.toggle(
+            'active',
+            link.getAttribute('href') === '#' + entry.target.id
+          );
+        });
+      }
+    });
+  }, { rootMargin: '-25% 0px -60% 0px' });
+
+  sections.forEach(section => sectionObserver.observe(section));
+}
+</script>
+</body>
+</html>
